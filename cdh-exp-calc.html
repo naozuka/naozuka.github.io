@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<style>		
+		body { font-family: Helvetica, Arial, sans-serif; color: #333; font-size: 15px; }
+		span { line-height: 20px; }
+		body > div { padding: 10px }
+	</style>
+	
+	<div>
+		<h3>Crazy Defense Heroes - XP Calculator</h3>
+	</div>
+	
+	<div>
+		<div><span>Start Level</span></div>	
+		<div><input type="text" id="input-level" value="41"></div>
+	</div>
+	
+	<div>
+		<div><span>Start XP</span></div>
+		<div><input type="text" id="input-curr-xp" value="91406"></div>
+	</div>
+	
+	<div>
+		<div><span>XP Needed</span></div>
+		<div><input type="text" id="input-xp" value="375000"></div>
+	</div>
+	
+	<div>
+		<div><button onclick='calculate()'>Calculate</button></div>			
+	</div>
+	
+	<div>
+		<div><span id='span-result'></span></div>	
+	</div>
+
+    <script>
+	
+	let xpTable = [
+		{ "level": 1, "xp": 0 },
+		{ "level": 2, "xp": 1300 },
+		{ "level": 3, "xp": 2800 },
+		{ "level": 4, "xp": 5800 },
+		{ "level": 5, "xp": 10300 },
+		{ "level": 6, "xp": 16300 },
+		{ "level": 7, "xp": 23800 },
+		{ "level": 8, "xp": 32800 },
+		{ "level": 9, "xp": 43300 },
+		{ "level": 10, "xp": 55300 },
+		{ "level": 11, "xp": 68800 },
+		{ "level": 12, "xp": 83800 },
+		{ "level": 13, "xp": 100300 },
+		{ "level": 14, "xp": 118300 },
+		{ "level": 15, "xp": 137800 },
+		{ "level": 16, "xp": 158800 },
+		{ "level": 17, "xp": 181300 },
+		{ "level": 18, "xp": 205300 },
+		{ "level": 19, "xp": 230800 },
+		{ "level": 20, "xp": 257800 },
+		{ "level": 21, "xp": 286300 },
+		{ "level": 22, "xp": 316300 },
+		{ "level": 23, "xp": 347800 },
+		{ "level": 24, "xp": 380800 },
+		{ "level": 25, "xp": 415300 },
+		{ "level": 26, "xp": 451300 },
+		{ "level": 27, "xp": 491300 },
+		{ "level": 28, "xp": 535300 },
+		{ "level": 29, "xp": 583300 },
+		{ "level": 30, "xp": 635300 },
+		{ "level": 31, "xp": 691300 },
+		{ "level": 32, "xp": 751300 },
+		{ "level": 33, "xp": 815300 },
+		{ "level": 34, "xp": 883300 },
+		{ "level": 35, "xp": 955300 },
+		{ "level": 36, "xp": 1031300 },
+		{ "level": 37, "xp": 1111300 },
+		{ "level": 38, "xp": 1195300 },
+		{ "level": 39, "xp": 1283300 },
+		{ "level": 40, "xp": 1375300 },
+		{ "level": 41, "xp": 1471300 },
+		{ "level": 42, "xp": 1571300 },
+		{ "level": 43, "xp": 1675300 },
+		{ "level": 44, "xp": 1783300 },
+		{ "level": 45, "xp": 1895300 },
+		{ "level": 46, "xp": 2011300 },
+		{ "level": 47, "xp": 2131300 },
+		{ "level": 48, "xp": 2255300 },
+		{ "level": 49, "xp": 2383300 },
+		{ "level": 50, "xp": 2515300 },
+		{ "level": 51, "xp": 2651300 },
+		{ "level": 52, "xp": 2791300 },
+		{ "level": 53, "xp": 2935300 },
+		{ "level": 54, "xp": 3083300 },
+		{ "level": 55, "xp": 3235300 },
+		{ "level": 56, "xp": 3391300 },
+		{ "level": 57, "xp": 3551300 },
+		{ "level": 58, "xp": 3715300 },
+		{ "level": 59, "xp": 3883300 },
+		{ "level": 60, "xp": 4055300 },
+		{ "level": 61, "xp": 4231300 },
+		{ "level": 62, "xp": 4411300 },
+		{ "level": 63, "xp": 4595300 },
+		{ "level": 64, "xp": 4783300 },
+		{ "level": 65, "xp": 4975300 },
+		{ "level": 66, "xp": 5171300 },
+		{ "level": 67, "xp": 5371300 },
+		{ "level": 68, "xp": 5575300 },
+		{ "level": 69, "xp": 5783300 },
+		{ "level": 70, "xp": 5995300 },
+		{ "level": 71, "xp": 6211300 },
+		{ "level": 72, "xp": 6431300 },
+		{ "level": 73, "xp": 6655300 },
+		{ "level": 74, "xp": 6883300 },
+		{ "level": 75, "xp": 7115300 },
+		{ "level": 76, "xp": 7351300 },
+		{ "level": 77, "xp": 7591300 },
+		{ "level": 78, "xp": 7835300 },
+		{ "level": 79, "xp": 8083300 },
+		{ "level": 80, "xp": 8335300 },
+		{ "level": 81, "xp": 8591300 },
+		{ "level": 82, "xp": 8851300 },
+		{ "level": 83, "xp": 9115300 },
+		{ "level": 84, "xp": 9383300 },
+		{ "level": 85, "xp": 9655300 },
+		{ "level": 86, "xp": 9931300 },
+		{ "level": 87, "xp": 10211300 },
+		{ "level": 88, "xp": 10495300 },
+		{ "level": 89, "xp": 10783300 },
+		{ "level": 90, "xp": 11075300 },
+		{ "level": 91, "xp": 11371300 },
+		{ "level": 92, "xp": 11671300 },
+		{ "level": 93, "xp": 11975300 },
+		{ "level": 94, "xp": 12283300 },
+		{ "level": 95, "xp": 12595300 },
+		{ "level": 96, "xp": 12911300 },
+		{ "level": 97, "xp": 13231300 },
+		{ "level": 98, "xp": 13555300 },
+		{ "level": 99, "xp": 13883300 },
+		{ "level": 100, "xp": 14215300 },
+		{ "level": 101, "xp": 14551300 },
+		{ "level": 102, "xp": 14891300 },
+		{ "level": 103, "xp": 15235300 },
+		{ "level": 104, "xp": 15583300 },
+		{ "level": 105, "xp": 15935300 },
+		{ "level": 106, "xp": 16291300 },
+		{ "level": 107, "xp": 16651300 },
+		{ "level": 108, "xp": 17015300 },
+		{ "level": 109, "xp": 17383300 },
+		{ "level": 110, "xp": 17755300 },
+		{ "level": 111, "xp": 18131300 },
+		{ "level": 112, "xp": 18511300 },
+		{ "level": 113, "xp": 18895300 },
+		{ "level": 114, "xp": 19283300 },
+		{ "level": 115, "xp": 19675300 },
+		{ "level": 116, "xp": 20071300 },
+		{ "level": 117, "xp": 20471300 },
+		{ "level": 118, "xp": 20875300 },
+		{ "level": 119, "xp": 21283300 },
+		{ "level": 120, "xp": 21695300 },
+		{ "level": 121, "xp": 22111300 },
+		{ "level": 122, "xp": 22531300 },
+		{ "level": 123, "xp": 22955300 },
+		{ "level": 124, "xp": 23383300 },
+		{ "level": 125, "xp": 23815300 },
+		{ "level": 126, "xp": 24251300 },
+		{ "level": 127, "xp": 24691300 },
+		{ "level": 128, "xp": 25135300 },
+		{ "level": 129, "xp": 25583300 },
+		{ "level": 130, "xp": 26035300 },
+		{ "level": 131, "xp": 26491300 },
+		{ "level": 132, "xp": 26951300 },
+		{ "level": 133, "xp": 27415300 },
+		{ "level": 134, "xp": 27883300 },
+		{ "level": 135, "xp": 28355300 },
+		{ "level": 136, "xp": 28831300 },
+		{ "level": 137, "xp": 29311300 },
+		{ "level": 138, "xp": 29795300 },
+		{ "level": 139, "xp": 30283300 },
+		{ "level": 140, "xp": 30775300 },
+		{ "level": 141, "xp": 31271300 },
+		{ "level": 142, "xp": 31771300 },
+		{ "level": 143, "xp": 32275300 },
+		{ "level": 144, "xp": 32783300 },
+		{ "level": 145, "xp": 33295300 },
+		{ "level": 146, "xp": 33811300 },
+		{ "level": 147, "xp": 34331300 },
+		{ "level": 148, "xp": 34855300 },
+		{ "level": 149, "xp": 35383300 },
+		{ "level": 150, "xp": 35915300 },
+	]    
+	
+	const format = num => String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1,');
+	
+	function calculate() {
+		let level = parseFloat(document.getElementById("input-level").value);
+		let currXp = parseFloat(document.getElementById("input-curr-xp").value);
+		let xpNeeded = parseFloat(document.getElementById("input-xp").value);
+		
+		let tempXp = xpTable[level-1].xp+currXp;		
+		let tempXpNeeded = tempXp+xpNeeded;
+		console.log(tempXp, tempXpNeeded);
+		
+		let findLevel = xpTable.find(x => x.xp > tempXpNeeded);
+		console.log(findLevel);
+		
+		let finalLevel = findLevel.level-1;
+		let finalXp = tempXpNeeded - xpTable[finalLevel-1].xp;
+		console.log(finalLevel, finalXp);
+		
+		document.getElementById("span-result").textContent = "You must reach level " + finalLevel + " with " + format(finalXp) + " XP.";
+	}
+
+    </script>
+
+</body>
+</html>
