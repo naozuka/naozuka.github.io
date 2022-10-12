@@ -91,6 +91,7 @@ function filterMonster() {
 			campaign: el.campaign,
 			levelname: el.levelname,
 			difficulty: el.difficulty, 
+			totalmana: el.totalmana,
 			amount: selectAmount(el)
 		}
     })
@@ -112,12 +113,21 @@ function injectHtml(idselector, html) {
 }
 
 function insertResult(arrayData) {
+	if (arrayData.length == 0) {
+		return
+	}
+	
     let result = 
         "<table>"+
         "<thead>"+
         "  <tr>"+
-        "    <th>Campaign</th>"+
-        "    <th>Level</th>"+
+        "    <th>Campaign - Level</th>"
+		
+	if (arrayData[0].totalmana != undefined) {
+		result += "<th>Total Mana</th>"
+	}
+	
+	result +=			
         "    <th>"+searchTitle+"</th>"+
         "  </tr>"+
         "</thead>"+
@@ -125,10 +135,13 @@ function insertResult(arrayData) {
 
     for (i = 0; i < arrayData.length; i++) {
         result += "<tr>"+
-            "<td>"+arrayData[i].campaign+"</td>"+
-            "<td>"+arrayData[i].levelname+"</td>"+
-			"<td>"+arrayData[i].amount+"</td>"
-
+            "<td>"+arrayData[i].campaign+" - "+arrayData[i].levelname+"</td>"
+			
+		if (arrayData[0].totalmana != undefined) {
+			result += "<td>"+arrayData[i].totalmana+"</td>"
+		}
+		
+		result += "<td>"+arrayData[i].amount+"</td>"
         result += "</tr>"
     }
 
@@ -174,13 +187,13 @@ function listTotalMana() {
         return { 			
 			campaign: el.campaign,
 			levelname: el.levelname,
-			difficulty: el.difficulty, 
+			difficulty: el.difficulty,
 			amount: el.totalmana
 		}
     })
 
     listTotalMana = listTotalMana.filter(x => isSelected(x.difficulty))
-	listTotalMana = sortDescAmount(listTotalMana)   
+	listTotalMana = sortDescAmount(listTotalMana)
 	
 	if (firstInput > 0) {
 		listTotalMana = listTotalMana.slice(0, firstInput)
