@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+	<!-- Google Fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+	<!-- CSS Reset -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+	<!-- Milligram CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">	
+	
+	<title>Crazy Defense Heroes - XP Calculator</title>
+</head>
 <body>
 	<style>		
-		body { font-family: Helvetica, Arial, sans-serif; color: #333; font-size: 15px; }
-		span { line-height: 20px; }
-		body > div { padding: 10px }
+		body { padding-top: 12px; }		
 	</style>
-	
-	<div>
-		<h3>Crazy Defense Heroes - XP Calculator</h3>
-	</div>
-	
-	<div>
-		<div><span>Start Level</span></div>	
-		<div><input type="text" id="input-level" value="41"></div>
-	</div>
-	
-	<div>
-		<div><span>Start XP</span></div>
-		<div><input type="text" id="input-curr-xp" value="91406"></div>
-	</div>
-	
-	<div>
-		<div><span>XP Needed</span></div>
-		<div><input type="text" id="input-xp" value="375000"></div>
-	</div>
-	
-	<div>
-		<div><button onclick='calculate()'>Calculate</button></div>			
-	</div>
-	
-	<div>
-		<div><span id='span-result'></span></div>	
-	</div>
+
+	<main class="wrapper">
+		<section class="container">
+			<h4>Crazy Defense Heroes - XP Calculator</h4>
+
+			<input type="text" id="input-level" placeholder="Start Level" value="41">
+			<input type="text" id="input-curr-xp" placeholder="Start XP" value="91406">
+			<input type="text" id="input-xp" placeholder="XP Needed" value="375000">
+			<a class="button" href="#" onclick='calculate()'><span class="pln">Calculate</span></a>	
+			
+			<div class="row"><span id='span-result'></span></div>
+		</section>
+	</main>	
 
     <script>
 	
