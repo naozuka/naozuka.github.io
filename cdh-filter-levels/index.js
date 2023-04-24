@@ -180,9 +180,6 @@ function findLevels() {
 }
 
 function listTotalMana() {
-	buildCampaigns()
-	buildMonstersList()
-	
 	setParameters()
 	searchTitle = "Total Mana"
 	
