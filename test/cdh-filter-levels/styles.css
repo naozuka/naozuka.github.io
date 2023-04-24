@@ -1,0 +1,11 @@
+body { 
+    padding-top: 12px;
+}
+
+.checkbox {
+	padding-right: 12px;
+}
+
+.checkbox input {
+	margin-right: 4px;
+}

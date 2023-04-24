@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>	
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+	<!-- Google Fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+	<!-- CSS Reset -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+	<!-- Milligram CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+	
+	<script type="text/javascript" src="./cdh-filter-levels/data.js?v=20230424"></script>
+	<script type="text/javascript" src="./cdh-filter-levels/index.js?v=20230424"></script>
+	<link rel="stylesheet" href="./cdh-filter-levels/styles.css?v=20230424">
+	<title>CDH - Filter Levels by Monster or Faction</title>
+	</head>
+<body>	
+	<main class="wrapper">
+		<section class="container">
+			<h4>CDH - Filter Levels by Monster or Faction</h4>
+			
+			<input list="monsters-list" name="monsters" id="input-monster" placeholder="Monster or Faction Name">
+			<datalist id="monsters-list">			  
+			</datalist>
+			
+			
+			<div class="row">
+				<div class="column">
+					<label>Filter Difficulty</label>
+					<span class="checkbox"><input id="input-normal" type="checkbox" checked>Normal</input></span>
+					<span class="checkbox"><input id="input-hard" type="checkbox" checked>Hard</input></span>
+					<span class="checkbox"><input id="input-crazy" type="checkbox" checked>Crazy</input></span>
+					<span class="checkbox"><input id="input-nightmare" type="checkbox" checked>Nightmare</input></span>
+				</div>			
+				
+				<div class="column column-33">
+					<label>Show First</label>
+					<select id="input-first">
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>					
+						<option value="0">All</option>
+					</select>
+				</div>
+			</div>
+			
+			<a class="button" href="#" onclick='findLevels()'><span class="pln">Find Levels</span></a>	
+			<button class="button button-outline" onclick="listTotalMana()"><span class="pln">List Total Mana</span></button>		
+		
+			<span id='span-result'></span>
+		</section>
+	</main>
+</body>
+</html>
