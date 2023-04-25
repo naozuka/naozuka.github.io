@@ -10,11 +10,9 @@ let searchTitle = ""
 
 function addMonster(arr) {
 	for (let i = 0; i < arr.length; i++) {
-		if (monstersList.find(x => x === arr[i].name)) {			
-			return			
+		if (!monstersList.find(x => x === arr[i].name)) {
+			monstersList.push(arr[i].name);
 		}
-		
-		monstersList.push(arr[i].name);
 	}
 }
 
