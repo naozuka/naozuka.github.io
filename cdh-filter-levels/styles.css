@@ -9,3 +9,11 @@ body {
 .checkbox input {
 	margin-right: 4px;
 }
+
+@media all and (min-width:0px) and (max-width: 500px) {
+  /* put your css styles in here */
+  body { 
+    font-size: 1.4em;
+	line-height: 1.4;
+  }
+}
