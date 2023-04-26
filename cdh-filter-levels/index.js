@@ -89,6 +89,7 @@ function filterMonster() {
 			campaign: el.campaign,
 			levelname: el.levelname,
 			difficulty: el.difficulty, 
+			energy: el.energy,
 			totalmana: el.totalmana,
 			amount: selectAmount(el)
 		}
@@ -119,7 +120,8 @@ function insertResult(arrayData) {
         "<table>"+
         "<thead>"+
         "  <tr>"+
-        "    <th>Campaign - Level</th>"
+        "    <th>Campaign - Level</th>"+
+		"    <th>Energy</th>"
 		
 	if (arrayData[0].totalmana != undefined) {
 		result += "<th>Total Mana</th>"
@@ -133,7 +135,8 @@ function insertResult(arrayData) {
 
     for (i = 0; i < arrayData.length; i++) {
         result += "<tr>"+
-            "<td>"+arrayData[i].campaign+" - "+arrayData[i].levelname+"</td>"
+            "<td>"+arrayData[i].campaign+" - "+arrayData[i].levelname+"</td>"+
+			"<td>"+arrayData[i].energy+"</td>"
 			
 		if (arrayData[0].totalmana != undefined) {
 			result += "<td>"+arrayData[i].totalmana+"</td>"
@@ -186,6 +189,7 @@ function listTotalMana() {
 			campaign: el.campaign,
 			levelname: el.levelname,
 			difficulty: el.difficulty,
+			energy: el.energy,
 			amount: el.totalmana
 		}
     })

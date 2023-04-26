@@ -14,5 +14,7 @@ body {
   /* put your css styles in here */
   body { 
     font-size: 1.4em;
+	line-height: 1.4;
+	color: blue;
   }
 }
