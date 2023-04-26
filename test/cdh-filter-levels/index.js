@@ -8,23 +8,22 @@ let opNightmare = false
 let firstInput = 0
 let searchTitle = ""
 
-function addMonster(arr) {
-	for (let i = 0; i < arr.length; i++) {
-		if (monstersList.find(x => x === arr[i].name)) {			
-			return			
+function addMonster(arr) {	
+	for (let i = 0; i < arr.length; i++) {		
+		if (!monstersList.find(x => x === arr[i].name)) {
+			monstersList.push(arr[i].name);
 		}
-		
-		monstersList.push(arr[i].name);
 	}
 }
 
 function buildCampaigns() {
 	let data = getData()
+	
 	for (let i = 0; i < data.length; i++) {
-        for (let j = 0; j < data[i].levels.length; j++) {			
+		for (let j = 0; j < data[i].levels.length; j++) {			
 			campaigns.push({
 				campaign: data[i].campaign,
-			    levelname: data[i].levels[j].levelname.trim()+" ["+data[i].levels[j].difficulty+"-"+data[i].levels[j].levelnumber+"]",
+				levelname: data[i].levels[j].levelname.trim()+" ["+data[i].levels[j].difficulty+"-"+data[i].levels[j].levelnumber+"]",
 				difficulty: data[i].levels[j].difficulty,
 				energy: data[i].levels[j].energy,
 				totalmana: data[i].levels[j].totalmana,
@@ -34,8 +33,8 @@ function buildCampaigns() {
 			
 			addMonster(data[i].levels[j].monsters)
 			addMonster(data[i].levels[j].factions)			
-        }
-    }
+		}
+	}
 }
 
 function findInArray(arr) {
@@ -91,6 +90,7 @@ function filterMonster() {
 			campaign: el.campaign,
 			levelname: el.levelname,
 			difficulty: el.difficulty, 
+			energy: el.energy,
 			totalmana: el.totalmana,
 			amount: selectAmount(el)
 		}
@@ -121,7 +121,8 @@ function insertResult(arrayData) {
         "<table>"+
         "<thead>"+
         "  <tr>"+
-        "    <th>Campaign - Level</th>"
+        "    <th>Campaign - Level</th>"+
+		"    <th>Energy</th>"
 		
 	if (arrayData[0].totalmana != undefined) {
 		result += "<th>Total Mana</th>"
@@ -135,7 +136,8 @@ function insertResult(arrayData) {
 
     for (i = 0; i < arrayData.length; i++) {
         result += "<tr>"+
-            "<td>"+arrayData[i].campaign+" - "+arrayData[i].levelname+"</td>"
+            "<td>"+arrayData[i].campaign+" - "+arrayData[i].levelname+"</td>"+
+			"<td>"+arrayData[i].energy+"</td>"
 			
 		if (arrayData[0].totalmana != undefined) {
 			result += "<td>"+arrayData[i].totalmana+"</td>"
@@ -154,8 +156,6 @@ function insertResult(arrayData) {
 
 function buildMonstersList() {
 	let options = ""
-	
-	console.log(monstersList)
 	
 	for (let i = 0; i < monstersList.length; i++) {
 		options += "<option value='"+monstersList[i]+"'>"
@@ -190,6 +190,7 @@ function listTotalMana() {
 			campaign: el.campaign,
 			levelname: el.levelname,
 			difficulty: el.difficulty,
+			energy: el.energy,
 			amount: el.totalmana
 		}
     })
@@ -202,6 +203,10 @@ function listTotalMana() {
 	}
 		
     insertResult(listTotalMana)
+}
+
+function updateMonsterList() {
+	let input = document.getElementById("input-monster")	
 }
 
 window.onload = function() {	
